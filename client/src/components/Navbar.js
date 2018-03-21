@@ -1,22 +1,25 @@
 //LIBRARIES & PACKAGES
 import React from 'react';
-import { NavLink, withRouter, Link } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 
 //ACTIONS
 import { logout } from '../actions/user';
 
-const links = [{ name: 'HOME', path: '/' }, { name: 'ABOUT', path: '/about' }];
+const links = [
+	{ name: 'home', path: '/' },
+	{ name: 'about', path: '/about' }
+];
 
 const authenticatedLinks = [
-	{ name: 'DASHBOARD', path: '/dashboard' },
-	{ name: 'LOG OUT' }
+	{ name: 'dashboard', path: '/dashboard' },
+	{ name: 'logout' }
 ];
 
 const unAuthenticatedLinks = [
-	{ name: 'LOGIN', path: '/login' },
-	{ name: 'REGISTER', path: '/register' }
+	{ name: 'login', path: '/signin' },
+	{ name: 'register', path: '/register' }
 ];
 
 class Navbar extends React.Component {
@@ -26,11 +29,11 @@ class Navbar extends React.Component {
 			return (
 				<Menu.Item
 					key={i}
-					active={nav.name !== 'LOG OUT' && nav.path === location.pathname}
+					active={nav.name !== 'logout' && nav.path === location.pathname}
 					name={nav.name}
 				>
-					{nav.name === 'LOG OUT' ? (
-						<Link
+					{nav.name === 'logout' ? (
+						<a
 							style={{ cursor: 'pointer' }}
 							onClick={() => {
 								dispatch(logout());
@@ -38,7 +41,7 @@ class Navbar extends React.Component {
 							}}
 						>
 							{nav.name}
-						</Link>
+						</a>
 					) : (
 						<NavLink to={nav.path}>{nav.name}</NavLink>
 					)}
